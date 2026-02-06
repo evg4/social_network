@@ -12,14 +12,17 @@ class PostRepository:
         result = self._connection.execute("SELECT * FROM posts WHERE id = %s", [post_id])[0]
         return Post(result['id'], result['title'], result['content'], result['user_id'], result['number_of_views'] )
     
-
-    
     def delete_post_by_id(self, post_id):
         self._connection.execute("DELETE FROM posts WHERE id = %s", [post_id])
         return None
     
-    def create_post(self, title, content, user_id, number_of_views):
-        self._connection.execute("INSERT INTO posts (title, content, user_id, number_of_views) VALUES (%s, %s, %s, %s)", [title, content, user_id, number_of_views])
+    # the below works, but it is neater to pass in a User object as one argument rather than each individual attribute (see second version)
+
+    # def create_post(self, title, content, user_id, number_of_views):
+    #     self._connection.execute("INSERT INTO posts (title, content, user_id, number_of_views) VALUES (%s, %s, %s, %s)", [title, content, user_id, number_of_views])
+
+    def create_post(self, post):
+        self._connection.execute("INSERT INTO posts (title, content, user_id, number_of_views) VALUES (%s, %s, %s, %s)", [post.title, post.content, post.user_id, post.number_of_views])
 
     def increment_views(self, post_id, increase_by):
         current_views = self._connection.execute("SELECT number_of_views FROM posts WHERE id = %s", [post_id])[0]['number_of_views']
