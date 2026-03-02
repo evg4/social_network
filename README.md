@@ -2,7 +2,11 @@
 ## Description
 This python project connects with a PostgreSQL database to allow users to create, read, update and delete posts/users. 
 
-## How to use
+## How to use (mac)
+
+### Requirements
+- Python 3.10+
+- PostgreSQL - ensure this is installed and running locally before creating the database
 
 ``` bash
 # Clone the repo
@@ -10,7 +14,7 @@ git clone https://github.com/evg4/social_network.git
 
 # Set up a venv and install the requirements
 cd social_network
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
